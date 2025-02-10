@@ -37,8 +37,8 @@ This document will **NOT** cover installation requirements for this hardware, as
 Prerequisite Installation  
 
 There are certain prerequisites for the **gsr** software that must be satisfied before installing the software.
-``` {.western style="margin-left: 0.38in; font-weight: bold"}
-```**- FOR LINUX -**
+
+**- LINUX Install -**
 
 1.  ### Development Tools
 
