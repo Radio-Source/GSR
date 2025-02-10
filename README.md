@@ -85,7 +85,7 @@ To copy ra_funcs.py to Python bin
 sudo make install
 ```
 
-1.  ### Invoking gsr
+2.  ### Invoking gsr
 
 gsr is a Python3 script run by
 
