@@ -1,4 +1,4 @@
-**Installation and usage: gsr   -  Gnuradio Spectro Radiometer**
+## **Installation and usage: gsr   -  Gnuradio Spectro Radiometer**
 
 Author : Pierre Terrier
 
@@ -40,7 +40,7 @@ Prerequisite Installation
 
 There are certain prerequisites for the **gsr** software that must be satisfied before installing the software.
 
-**- LINUX Install -**
+# **- LINUX Install -**
 
 1.  ### Development Tools
 
@@ -97,7 +97,7 @@ But also you run gsr from GnuRadio-Compagnion
 
 ------------------------
 
-Windows (10-11) Install
+# Windows (10-11) Install
 ------------------------
 Prerequisite Installation  
 
