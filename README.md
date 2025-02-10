@@ -77,6 +77,13 @@ git clone https://github.com/Radio-Source/GSR
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
 cd GSR
 ```
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
+cd gsr
+```
+To copy ra_funcs.py to Python bin
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
+sudo make install
+```
 
 1.  ### Invoking gsr
 
