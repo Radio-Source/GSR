@@ -77,9 +77,9 @@ cd GSR
 ```
 
 1.  ### Invoking gsr
-``` {.western style="margin-left: 0.38in; font-weight: normal"}
+
 gsr is a Python3 script run by
-```
+
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
 python3 gsr.py (if you use RTL-SDR with default [args])
 ```
