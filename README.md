@@ -16,9 +16,7 @@ The system hardware should be a fairly-modern, multi-core system, preferably X86
 
 There should be at least 2G of system memory, with a basic clock speed of at least 1.4GHz for X86 systems, and 1.8GHz for ARM systems.
 
-Canveats
-
-SDR requirements
+*SDR requirements*
 
 The software supports many different SDR hardware platforms:
 
