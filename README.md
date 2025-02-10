@@ -4,13 +4,13 @@ Author : Pierre Terrier
 
 The code is based of baa_seminar gnuradio created by Marcus Leech. 
 
-Introduction
+**Introduction**
 
 This document describes the installation, system requirements, and usage of the *Gnu Radio* application known as **gsr** Gnuradio Spectro Radiometer.
 
-System Requirements
+**System Requirements**
 
-*Ubuntu 24.04 LTS* or *Windows 10/11*
+**Ubuntu 24.04 LTS** or **Windows 10/11**
 
 The system hardware should be a fairly-modern, multi-core system, preferably X86-based, but some of the higher-end ARM SBCs, like the *Raspberry PI 4/5* will also work, albeit at lower sample rates.
 
