@@ -2,7 +2,9 @@
 
 Author : Pierre Terrier
 
-The code is based of baa_seminar gnuradio created by Marcus Leech. 
+The code is based of baa_seminar gnuradio created by Marcus Leech (CCERA)
+
+You can see an fork of baa_seminar that have created here : https://github.com/Radio-Source/baa_seminar_fork 
 
 **Introduction**
 
