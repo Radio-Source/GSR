@@ -76,7 +76,7 @@ git clone https://github.com/Radio-Source/GSR
 cd GSR
 ```
 
-1.  ### Invoking spectro\_radiometer
+1.  ### Invoking gsr
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
 gsr is a Python3 script run by
 ```
