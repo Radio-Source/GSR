@@ -161,3 +161,5 @@ You can choice Frequency file type .csv or ezRA type (txt)
 ezRA file have header ezRA compatible, directly usable with ezCon see https://github.com/tedcline/ezRA/
 
 
+![gsr1](https://github.com/user-attachments/assets/53c6b99c-0e2a-451c-ba3c-04b9259ef5fb)
+
