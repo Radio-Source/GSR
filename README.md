@@ -119,7 +119,8 @@ https://git-scm.com/downloads/win
 Download git for easy copying my repository https://git-scm.com/downloads/win After install open CMD shell and goto your Documents directory Then type command :
 
 git clone https://github.com/Radio-Source/GSR/
-![new_gr-radio_astro_cmd-git](https://github.com/user-attachments/assets/bdae7a54-b074-4027-8be4-839f489e9805)
+![gsr2](https://github.com/user-attachments/assets/0a1f7495-0c65-4722-9dec-c1f20a90395a)
+
 
 
 
