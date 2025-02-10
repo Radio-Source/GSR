@@ -134,7 +134,7 @@ example for me user name is "smrt" in this screenshot
 ![gsr3](https://github.com/user-attachments/assets/2be19355-84a0-4c53-b76e-0716f2475386)
 
 
-**Then reboot Windows to load ra_funcs.py at start of radioconda next time**
+<ins>**Then reboot Windows to load ra_funcs.py at start of radioconda next time**</ins>
 
 And open Gnuradio
 
