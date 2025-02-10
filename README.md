@@ -88,7 +88,7 @@ python3 gsr.py
 
 But also you run gsr from GnuRadio-Compagnion
 
-
+------------------------
 
 Windows (10-11) Install
 ------------------------
