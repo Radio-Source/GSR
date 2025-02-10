@@ -121,7 +121,9 @@ Download and install git for windows
 
 Download git for easy copying my repository https://git-scm.com/downloads/win After install open CMD shell and goto your Documents directory Then type command :
 
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
 git clone https://github.com/Radio-Source/GSR/
+```
 ![gsr2](https://github.com/user-attachments/assets/0a1f7495-0c65-4722-9dec-c1f20a90395a)
 
 Goto in your Documents in GSR subdir and gsr subdir
