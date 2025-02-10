@@ -148,3 +148,14 @@ For example on my computer my Users account is smrt
 You can see this command line at run in radioconda
 *C:\Users\smrt\radioconda\python.exe -u C:\Users\smrt\Documents\gsr\gsr.py*
 
+
+Usage :
+after running
+
+You can change some parameters Location, longitude, latitude, amsl (Altitude above Mean Sea Level)
+
+Antenna orientation parameters, for the moment we have chosen that the antenna only points upwards. It is oriented to the meridian in azimuth
+
+You can choice Frequency file type .csv or ezRA type (txt)
+
+ezRA file have header ezRA compatible, directly usable with ezCon
