@@ -1,24 +1,20 @@
-**Installation and usage: spectro\_radiometer**
+**Installation and usage: gsr  Gnuradio Spectro Radiometer**
 
-Marcus Leech
-
-*Canadian Centre for Experimental Radio Astronomy*
+Pierre Terrier
 
 Introduction
 
-This document describes the installation, system requirements, and usage of the *Gnu Radio* application known as **spectro\_radiometer**<sup>[<sup>1</sup>](#sdfootnote1sym)</sup>.
+This document describes the installation, system requirements, and usage of the *Gnu Radio* application known as **gsr** Gnuradio Spectro Radiometer.
 
 System Requirements
 
-This document assumes that you have already installed *Ubuntu 18.04 LTS* onto your system. The instructions given here would need to be modified for other *Linux* distributions, and *Ubuntu* is one of the more popular distributions.
+*Ubuntu 24.04 LTS* or *Windows 10/11*
 
-The system hardware should be a fairly-modern, multi-core system, preferably X86-based, but some of the higher-end ARM SBCs, like the *Odroid N2*and *XU4* will also work, albeit at lower sample rates.
+The system hardware should be a fairly-modern, multi-core system, preferably X86-based, but some of the higher-end ARM SBCs, like the *Raspberry PI 4/5* will also work, albeit at lower sample rates.
 
 There should be at least 2G of system memory, with a basic clock speed of at least 1.4GHz for X86 systems, and 1.8GHz for ARM systems.
 
-Caveats
-
-This document**DOES NOT** cover basic system installation procedures and requirements. If you aren't familiar with Ubuntu 18.04 installation procedures, and basic system management tasks, you should **BECOME FAMILIAR WITH THOSE FIRST**.
+Canveats
 
 SDR requirements
 
@@ -36,9 +32,9 @@ The software supports many different SDR hardware platforms:
 
 This document will **NOT** cover installation requirements for this hardware, as that information is generally provided by the manufacturers.
 
-Prerequisite Installation    modified by Pierre Terrier
+Prerequisite Installation  
 
-There are certain prerequisites for the **spectro\_radiometer** software that must be satisfied before installing the software.
+There are certain prerequisites for the **gsr** software that must be satisfied before installing the software.
 
 1.  ### Development Tools
 
