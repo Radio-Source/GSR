@@ -9,7 +9,7 @@ on the screenshot above I also display Stellarium with the HI4PI Survey
 You can see an fork of baa_seminar that have created here : https://github.com/Radio-Source/baa_seminar_fork 
 and youtube video : https://www.youtube.com/watch?v=2awvu_p2-yE
 
-**I changed the interface displaying the total power received (display over 1 day) and writing FFT files (spectrum) with a compatible ezRA option**
+## **I changed the interface displaying the total power received (display over 1 day) and writing FFT files (spectrum) with a compatible ezRA option**
 
 **Introduction**
 
