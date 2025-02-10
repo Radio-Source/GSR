@@ -7,7 +7,7 @@ The code is based of baa_seminar gnuradio created by Marcus Leech (CCERA)
 
 
 You can see an fork of baa_seminar that have created here : https://github.com/Radio-Source/baa_seminar_fork 
-and youtube video : (https://www.youtube.com/watch?v=2awvu_p2-yE)
+and youtube video : https://www.youtube.com/watch?v=2awvu_p2-yE
 
 **Introduction**
 
