@@ -1,0 +1,2310 @@
+options:
+  parameters:
+    author: Pierre Terrier - Original code Marcus Leech (CCERA)
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: GNU-GPL
+    description: A simple spectro radiometer for radiastronmy
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: gsr
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Gnuradio Spectro Radiometer
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: LMST
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: Main@0:1,3,1,1
+    label: 'LMST :  '
+    type: string
+    value: ra_funcs.cur_sidereal(Longitude+tiktok).replace(",",":")
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 956.0]
+    rotation: 0
+    state: true
+- name: Longitude
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: Main@0:1,1,1,1
+    label: 'Longitude : '
+    min_len: '20'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '-180'
+    step: '0.1'
+    stop: '180'
+    value: longitude
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 948.0]
+    rotation: 0
+    state: enabled
+- name: actual_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: ifreq
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 160.0]
+    rotation: 0
+    state: true
+- name: alt
+  id: variable
+  parameters:
+    comment: ''
+    value: '30.00'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 728.0]
+    rotation: 0
+    state: enabled
+- name: altitude
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: Main@0:2,2,1,1
+    label: 'Altitude :  '
+    min_len: '20'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '-180.00'
+    step: '0.1'
+    stop: '180.00'
+    value: alt
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 1084.0]
+    rotation: 0
+    state: enabled
+- name: amsl
+  id: variable
+  parameters:
+    comment: ''
+    value: '600'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 728.0]
+    rotation: 0
+    state: enabled
+- name: azimut
+  id: variable
+  parameters:
+    comment: ''
+    value: '180'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 720.0]
+    rotation: 0
+    state: enabled
+- name: correct_baseline
+  id: variable_qtgui_check_box
+  parameters:
+    comment: ''
+    'false': 'False'
+    gui_hint: Main@0:3,1,1,1
+    label: Baseline Correction
+    'true': 'True'
+    type: bool
+    value: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 1268.0]
+    rotation: 0
+    state: true
+- name: data_rate
+  id: variable
+  parameters:
+    comment: 'The "back end" operates at this many Hz
+
+      20Hz should be more than adequate for
+
+      any data-logging requirements for this
+
+      type of observing'
+    value: '10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 432.0]
+    rotation: 0
+    state: enabled
+- name: dc_gain
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: Main@0:5,3,1,1
+    label: '"Detector Output Mult."'
+    label0: x100
+    label1: x1000
+    label2: x10000
+    label3: x100000
+    label4: x1000000
+    labels: '[]'
+    num_opts: '5'
+    option0: '100'
+    option1: '1000'
+    option2: '10000'
+    option3: '100000'
+    option4: '1000000'
+    options: '[0, 1, 2]'
+    orient: Qt.QHBoxLayout
+    type: int
+    value: '100'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 1452.0]
+    rotation: 0
+    state: enabled
+- name: decln
+  id: variable
+  parameters:
+    comment: ''
+    value: altitude-latitude
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 728.0]
+    rotation: 0
+    state: enabled
+- name: declnstr
+  id: variable
+  parameters:
+    comment: ''
+    value: ' str("%3.2f" % decln) if (decln<0) else "+"+str("%3.2f" % (decln))'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 728.0]
+    rotation: 0
+    state: enabled
+- name: dophigh
+  id: variable
+  parameters:
+    comment: ''
+    value: ((samp_rate/2.0)/ifreq)*299792.0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 432.0]
+    rotation: 0
+    state: enabled
+- name: doplow
+  id: variable
+  parameters:
+    comment: ''
+    value: -((samp_rate/2.0)/ifreq)*299792.0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 432.0]
+    rotation: 0
+    state: enabled
+- name: fftrate
+  id: variable
+  parameters:
+    comment: ''
+    value: int(samp_rate/fftsize)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 440.0]
+    rotation: 0
+    state: enabled
+- name: fftsize
+  id: variable
+  parameters:
+    comment: 'We make this a variable, but in reality
+
+      Embedded Python blocks
+
+      dont handle runtime vector sizing very well'
+    value: '2048'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 448.0]
+    rotation: 0
+    state: enabled
+- name: filechoice
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: Main@0:3,3,1,1
+    label: File type choice
+    label0: No file
+    label1: CSV file
+    label2: ezRA file
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '3'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QHBoxLayout
+    type: int
+    value: '0'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 1216.0]
+    rotation: 0
+    state: enabled
+- name: freqhigh
+  id: variable
+  parameters:
+    comment: ''
+    value: (ifreq+(samp_rate/2.0))/1.0e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 304.0]
+    rotation: 0
+    state: enabled
+- name: freqlow
+  id: variable
+  parameters:
+    comment: ''
+    value: (ifreq-(samp_rate/2.0))/1.0e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 232.0]
+    rotation: 0
+    state: enabled
+- name: freqstep
+  id: variable
+  parameters:
+    comment: ''
+    value: (samp_rate/fftsize)/1.0e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 376.0]
+    rotation: 0
+    state: enabled
+- name: gmt
+  id: variable
+  parameters:
+    comment: ''
+    value: time.gmtime()
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 720.0]
+    rotation: 0
+    state: true
+- name: idecln
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: Main@0:2,3,1,1
+    label: 'Declination target :  '
+    type: string
+    value: declnstr
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 1084.0]
+    rotation: 0
+    state: enabled
+- name: ifreq
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    entry_signal: editingFinished
+    gui_hint: Main@0:1,0,1,1
+    label: Tuned Frequency
+    type: real
+    value: freq
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 956.0]
+    rotation: 0
+    state: true
+- name: irfgain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: Main@0:2,0,1,1
+    label: RF Gain
+    min_len: '100'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '2.5'
+    stop: '100'
+    value: rfgain
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 1052.0]
+    rotation: 0
+    state: true
+- name: isinteg
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: Main@0:3,0,1,1
+    label: Spectral Integration Time
+    min_len: '100'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '1'
+    step: '1'
+    stop: '300'
+    value: sinteg
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 1260.0]
+    rotation: 0
+    state: true
+- name: itinteg
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: Main@0:5,0,1,1
+    label: TP Integration Time
+    min_len: '100'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '1'
+    step: '1'
+    stop: '300'
+    value: tinteg
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [168, 1564.0]
+    rotation: 0
+    state: true
+- name: latitude
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: Main@0:2,1,1,1
+    label: 'Latitude : '
+    min_len: '20'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '-90.00'
+    step: '0.1'
+    stop: '90.00'
+    value: '44.70'
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 1100.0]
+    rotation: 0
+    state: enabled
+- name: ltp
+  id: variable
+  parameters:
+    comment: ''
+    value: time.gmtime(time.time())
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 896.0]
+    rotation: 0
+    state: enabled
+- name: pacer
+  id: variable_function_probe
+  parameters:
+    block_id: pacer_probe
+    comment: 'A bit of a hack to get us an LMST
+
+      display that is updated at 1Hz'
+    function_args: ''
+    function_name: level
+    poll_rate: '1'
+    value: '0.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1272, 908.0]
+    rotation: 0
+    state: true
+- name: prefix
+  id: variable
+  parameters:
+    comment: ''
+    value: ' "%3.2f" % (decln)'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [824, 600.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: srate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 32.0]
+    rotation: 0
+    state: enabled
+- name: seconds
+  id: variable
+  parameters:
+    comment: ''
+    value: '3600'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1144, 720.0]
+    rotation: 0
+    state: enabled
+- name: split_ratio
+  id: variable
+  parameters:
+    comment: ''
+    value: '100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 432.0]
+    rotation: 0
+    state: true
+- name: tiktok
+  id: variable
+  parameters:
+    comment: ''
+    value: pacer*0.0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1248, 720.0]
+    rotation: 0
+    state: true
+- name: today
+  id: variable
+  parameters:
+    comment: ''
+    value: '"%04d-%02d-%02d" % (gmt.tm_year, gmt.tm_mon, gmt.tm_mday)'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [984, 720.0]
+    rotation: 0
+    state: true
+- name: variable_qtgui_label_0
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: Main@0:0,2,1,1
+    label: Antenna Parameters
+    type: string
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 852.0]
+    rotation: 0
+    state: enabled
+- name: variable_qtgui_label_1
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: Main@0:1,2,1,1
+    label: 'Azimut : '
+    type: string
+    value: 180 ( meridian transit )
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 956.0]
+    rotation: 0
+    state: enabled
+- name: variable_qtgui_label_3
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: Main@0:0,3,1,1
+    label: Astronomy Parameters
+    type: string
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 848.0]
+    rotation: 0
+    state: enabled
+- name: variable_qtgui_label_Location
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: Main@0:0,1,1,1
+    label: Location Parameters
+    type: string
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 848.0]
+    rotation: 0
+    state: enabled
+- name: variable_qtgui_label_rf
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: None
+    gui_hint: Main@0:0,0,1,1
+    label: RF SDR Parameters
+    type: string
+    value: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 848.0]
+    rotation: 0
+    state: enabled
+- name: velocity
+  id: variable_qtgui_check_box
+  parameters:
+    comment: ''
+    'false': '0'
+    gui_hint: Main@0:3,2,1,1
+    label: Velocity / Frequency
+    'true': '1'
+    type: int
+    value: vf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 1260.0]
+    rotation: 0
+    state: true
+- name: winpower
+  id: variable
+  parameters:
+    comment: ''
+    value: sum([x*x for x in window.blackman_harris(fftsize)])
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [760, 432.0]
+    rotation: 0
+    state: enabled
+- name: Main
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: 0,0
+    label0: GSR
+    label1: ''
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: ''
+    label3: ''
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 724.0]
+    rotation: 0
+    state: true
+- name: baseline_compensate
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\n\n\nclass blk(gr.sync_block):  # other base classes\
+      \ are basic_block, decim_block, interp_block\n    \"\"\"Baseline compensator\
+      \ block\n         Takes in an integrated FFT vector and either outputs that\
+      \ vector, or\n         outputs a baseline-subtracted version of that vector\n\
+      \         \n         fftsize - size of input vector\n         collect - operate\
+      \ in \"collect\" rather than compensate mode\n    \"\"\"\n\n    def __init__(self,\
+      \ fftsize=2048,collect=True):  # only default arguments here\n        \"\"\"\
+      arguments to this function show up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n\
+      \            self,\n            name='Baseline Compensator',   # will show up\
+      \ in GRC\n            in_sig=[(np.float32,fftsize)],\n            out_sig=[(np.float32,fftsize)]\n\
+      \        )\n        # if an attribute with the same name as a parameter is found,\n\
+      \        # a callback is registered (properties work, too).\n        self.collect\
+      \ = collect\n        self.fftbuf = np.zeros(fftsize,dtype=np.float32)\n\n  \
+      \  def work(self, input_items, output_items):\n        \"\"\"Accumulate baseline\
+      \ data, apply corrections when asked\"\"\"\n        if (self.collect == True):\n\
+      \            #\n            # Collect samples, and compute a moving average\
+      \ on them\n            # They're already fairly-well smoothed, so we don't\n\
+      \            # need to go overboard\n            #\n            for x in range(len(input_items[0])):\n\
+      \                self.fftbuf = np.add(self.fftbuf, input_items[0][x])\n    \
+      \            self.fftbuf = np.divide(self.fftbuf, [2.0]*len(self.fftbuf))\n\
+      \            self.avg = sum(self.fftbuf)/len(self.fftbuf)\n            self.avg\
+      \ *= 1.5\n            \n            for x in range(len(output_items[0])):\n\
+      \                output_items[0][x] = input_items[0][x]\n        else:\n   \
+      \         for x in range(len(output_items[0])):\n                output_items[0][x]\
+      \ = np.subtract(input_items[0][x], self.fftbuf)\n                output_items[0][x]\
+      \ = np.add(output_items[0][x], self.avg)\n        \n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    collect: True if correct_baseline == False else False
+    comment: Optionally apply baseline-subtraction
+    fftsize: fftsize
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('Baseline Compensator', 'blk', [('fftsize', '2048'), ('collect', 'True')],
+      [('0', 'float', 2048)], [('0', 'float', 2048)], 'Baseline compensator block\n         Takes
+      in an integrated FFT vector and either outputs that vector, or\n         outputs
+      a baseline-subtracted version of that vector\n         \n         fftsize -
+      size of input vector\n         collect - operate in "collect" rather than compensate
+      mode\n    ', ['collect'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1888, 584.0]
+    rotation: 0
+    state: true
+- name: blocks_complex_to_mag_squared_0
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: 'A detector
+
+      Computes
+
+      (I^2)+(Q^2)'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 184.0]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_squared_1
+  id: blocks_complex_to_mag_squared
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Convert to power estimate
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: fftsize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1392, 336.0]
+    rotation: 0
+    state: true
+- name: blocks_integrate_xx_0
+  id: blocks_integrate_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: split_ratio
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1224, 176.0]
+    rotation: 0
+    state: true
+- name: blocks_keep_one_in_n_0
+  id: blocks_keep_one_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: 'After filtering, we don''t need high
+
+      sample rates
+
+      reduce to ''data_rate'' Hz'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: int(int(samp_rate/data_rate)/split_ratio)
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2096, 176.0]
+    rotation: 0
+    state: enabled
+- name: blocks_keep_one_in_n_1
+  id: blocks_keep_one_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Decimate
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: int(fftrate/data_rate)
+    type: float
+    vlen: fftsize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1840, 416.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_xx_0
+  id: blocks_multiply_const_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Integrator doesn't reduce
+    const: (1.0/split_ratio)*dc_gain
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1464, 176.0]
+    rotation: 0
+    state: true
+- name: blocks_nlog10_ff_0
+  id: blocks_nlog10_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: 'Turn into 10Log10
+
+      Then scale appropriately'
+    k: -20*math.log10(fftsize)-10*math.log10(winpower/fftsize)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '10'
+    vlen: fftsize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2152, 564.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: fftsize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2544, 728.0]
+    rotation: 0
+    state: enabled
+- name: blocks_selector_0
+  id: blocks_selector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    enabled: 'True'
+    input_index: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '1'
+    num_outputs: '3'
+    output_index: filechoice
+    showports: 'True'
+    type: float
+    vlen: fftsize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2360, 860.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: 'FFT requires fft-sized vectors
+
+      we do that here'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: fftsize
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [840, 344.0]
+    rotation: 0
+    state: true
+- name: dmult
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Detector Multiplier
+    short_id: ''
+    type: eng_float
+    value: '100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1488, 572.0]
+    rotation: 0
+    state: true
+- name: ezRAvectorlogger
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\nimport time\nimport ra_funcs\n\nclass blk(gr.sync_block):\
+      \  # other base classes are basic_block, decim_block, interp_block\n    \"\"\
+      \"Logging of vectors (like FFT outputs)\n          fftsize - size of fft vector\
+      \ to log\n          formatter - formatter function pointer\n          filepat\
+      \ - pattern for beginning of filenaem\n          extension - file extension\n\
+      \          logtime - how often to log (seconds)\n          fmtstr - format string\
+      \ for data values\n          localtime - whether to use local or UTC time\n\
+      \          fftshift - whether to shift FFT vector before logging\n         \
+      \ longitude  - local longitude in decimal form\n    \"\"\"\n\n    def __init__(self,\
+      \ fftsize=2048, formatter=None, filepat=\"foonly-%04d%02d%02d\", extension=\"\
+      .csv\",\n        logtime=10, fmtstr=\"%11.9f\", localtime=False, fftshift=False,longitude=2.55,legend=None):\
+      \  # only default arguments here\n        \"\"\"arguments to this function show\
+      \ up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n         \
+      \   self,\n            name='ezRA Vector Logger',   # will show up in GRC\n\
+      \              in_sig=[(np.float32,fftsize)],\n            out_sig=None\n  \
+      \      )\n        \n        self.formatter = formatter\n        self.filepat\
+      \ = filepat\n        self.extension = extension\n        self.logtime = logtime\n\
+      \        self.fmtstr = fmtstr\n        self.localtime = localtime\n        self.vecavg\
+      \ = np.zeros(fftsize)\n        self.now = time.time()\n        self.fftshift\
+      \ = fftshift\n        self.longitude = longitude\n        self.legend = legend\n\
+      \        \n        self.legcount = 0\n        self.fn = \"\"\n        self.curlegend\
+      \ = legend\n        \n\n    def work(self, input_items, output_items):\n   \
+      \     \"\"\"Log a vector into a file\"\"\"\n        for x in range(len(input_items[0])):\n\
+      \            self.vecavg = np.add(self.vecavg, input_items[0][x])\n        \
+      \    self.vecavg = np.divide(self.vecavg, [2.0]*len(self.vecavg))\n        \n\
+      \        #\n        # If time to log\n        #\n        if (time.time() - self.now\
+      \ >= self.logtime):\n            self.now = time.time()\n            #\n   \
+      \         # Decide on localtime or gmtime\n            #\n            if (self.localtime\
+      \ == True):\n                ltp = time.localtime()\n            else:\n   \
+      \             ltp = time.gmtime()\n\n            if (self.formatter == None):\n\
+      \                fn = self.filepat % (ltp.tm_year, ltp.tm_mon, ltp.tm_mday)\
+      \ + self.extension\n                fp = open(fn, \"a\")\n                #\n\
+      \                # Filename has changed (new date) or\n                #  legend\
+      \ has changed (new DEC/FREQ/BW) or\n                #  legcount >= 30\n    \
+      \            #\n                wrlegend = False\n                if (self.fn\
+      \ != fn):\n                    self.fn = fn\n                    wrlegend =\
+      \ True\n                elif (self.curlegend != self.legend):\n            \
+      \        self.curlegend = self.legend\n                    wrlegend = True\n\
+      \                elif (self.legcount >= 30):\n                    wrlegend =\
+      \ True\n                    self.legcount = 0\n                if (wrlegend\
+      \ == True and self.legend != None):\n                    self.legcount = 0\n\
+      \                    fp.close()\n                    fn = self.filepat % (ltp.tm_year,\
+      \ ltp.tm_mon, ltp.tm_mday) + self.extension\n                    fp = open(fn,\
+      \ \"w\")\n                    fp.write(\"from ezColgsr.py\\n%s\\n# times are\
+      \ in UTC\\n# gain 49\\n# frequency spectrums in dB power\\n\" % self.legend)\n\
+      \                               \n                # If they specified a formatter\
+      \ function call it instead\n                #\n                if (self.formatter\
+      \ != None):\n                    self.formatter(self.vecavg,self.filepat,self.extension)\n\
+      \            \n                #\n                # Otherwise, do it here\n\
+      \                #\n                else:\n                    #\n         \
+      \           # Open the output file, with a name according to the filepat\n \
+      \                   #  specified\n                    #\n                  \
+      \  fp = open(self.filepat % (ltp.tm_year, ltp.tm_mon, ltp.tm_mday) + self.extension,\
+      \ \"a\")\n                   \n                    #\n                    #\
+      \ Write record header\n                    #\n                    fp.write (\"\
+      %04d-%02d-%02dT%02d:%02d:%02d \" % (ltp.tm_year, ltp.tm_mon, ltp.tm_mday,ltp.tm_hour,\
+      \ ltp.tm_min, ltp.tm_sec))\n                    # fp.write (\"%s,\" % ra_funcs.cur_sidereal(self.longitude))\n\
+      \                \n                    #\n                    # Write each of\
+      \ the data items in the input vector\n                    #\n              \
+      \  \n                    #\n                    # Check if they want us to \
+      \ do an FFTSHIFT operation\n                    #  (to  normalize the ordering\
+      \ of FFTW3 outputs)\n                    #\n                    if (self.fftshift\
+      \ == True):\n                        l = len(self.vecavg)\n                \
+      \        l1 = list(self.vecavg[int(l/2):])\n                        l2 = list(self.vecavg[0:int(l/2)])\n\
+      \                        lout = l1 + l2\n                        lout = np.array(lout)\n\
+      \                    else:\n                        lout = self.vecavg\n   \
+      \                 for x in range(len(self.vecavg)):\n                      \
+      \  fp.write(self.fmtstr % lout[x])\n                        if (x < len(self.vecavg)-1):\n\
+      \                            fp.write(\" \")\n                    fp.write(\"\
+      \\n\")\n                    fp.close()\n            \n            \n       \
+      \ return len(input_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    extension: '''.txt'''
+    fftshift: 'False'
+    fftsize: fftsize
+    filepat: '''ezRA%04d%02d%02d''+''_''+prefix'
+    fmtstr: '''%6.2f'''
+    formatter: None
+    legend: '"lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty
+      %g" % (latitude,Longitude,amsl,prefix,freqlow,freqhigh,fftsize)'
+    localtime: False if utc != 0 else True
+    logtime: logtime*3
+    longitude: longitude
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('ezRA Vector Logger', 'blk', [('fftsize', '2048'), ('formatter', 'None'),
+      ('filepat', "'foonly-%04d%02d%02d'"), ('extension', "'.csv'"), ('logtime', '10'),
+      ('fmtstr', "'%11.9f'"), ('localtime', 'False'), ('fftshift', 'False'), ('longitude',
+      '2.55'), ('legend', 'None')], [('0', 'float', 2048)], [], 'Logging of vectors
+      (like FFT outputs)\n          fftsize - size of fft vector to log\n          formatter
+      - formatter function pointer\n          filepat - pattern for beginning of filenaem\n          extension
+      - file extension\n          logtime - how often to log (seconds)\n          fmtstr
+      - format string for data values\n          localtime - whether to use local
+      or UTC time\n          fftshift - whether to shift FFT vector before logging\n          longitude  -
+      local longitude in decimal form\n    ', ['extension', 'fftshift', 'filepat',
+      'fmtstr', 'formatter', 'legend', 'localtime', 'logtime', 'longitude'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2736, 952.0]
+    rotation: 0
+    state: enabled
+- name: fft_vxx_0
+  id: fft_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: fftsize
+    forward: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nthreads: '1'
+    shift: 'True'
+    type: complex
+    window: window.blackmanharris(fftsize)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1064, 308.0]
+    rotation: 0
+    state: true
+- name: flipper
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\n\n\nclass blk(gr.sync_block):  # other base classes\
+      \ are basic_block, decim_block, interp_block\n    \"\"\"Flipper -- simply reverse\
+      \ the order of a vector\n               fftsize - size of the (probably FFT)\
+      \ vector\n               enabled - whether to flip or not\n    \"\"\"\n\n  \
+      \  def __init__(self, fftsize=2048,enabled=True):  # only default arguments\
+      \ here\n        \"\"\"arguments to this function show up as parameters in GRC\"\
+      \"\"\n        gr.sync_block.__init__(\n            self,\n            name='Flipper',\
+      \   # will show up in GRC\n            in_sig=[(np.float32,fftsize)],\n    \
+      \        out_sig=[(np.float32,fftsize)]\n        )\n        # if an attribute\
+      \ with the same name as a parameter is found,\n        # a callback is registered\
+      \ (properties work, too).\n        self.enabled = enabled\n\n    def work(self,\
+      \ input_items, output_items):\n        \"\"\"Flip order\"\"\"\n        \n  \
+      \      #\n        # For each output item\n        #\n        # Either stuff\
+      \ it with flipped input, or non-flipped input\n        #\n        for x in range(len(output_items[0])):\n\
+      \            if (self.enabled == True):\n                output_items[0][x]\
+      \ = input_items[0][x][::-1]\n            else:\n                output_items[0][x]\
+      \ = input_items[0][x]\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'Optionally flip the spectral vector for
+
+      display--for conventional display of
+
+      redshift/blueshift'
+    enabled: 'False'
+    fftsize: fftsize
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('Flipper', 'blk', [('fftsize', '2048'), ('enabled', 'True')], [('0',
+      'float', 2048)], [('0', 'float', 2048)], 'Flipper -- simply reverse the order
+      of a vector\n               fftsize - size of the (probably FFT) vector\n               enabled
+      - whether to flip or not\n    ', ['enabled'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2488, 576.0]
+    rotation: 0
+    state: true
+- name: formatter
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\nimport time\nimport ra_funcs\n\n\nclass blk(gr.sync_block):\
+      \  # other base classes are basic_block, decim_block, interp_block\n    \"\"\
+      \"A slow data textual formatter\n          inputs are expected to be science-data\n\
+      \             Parameters:\n                formatter - pointer to a custom formatter\
+      \ function\n                filepat - pattern used for formatting filename must\
+      \ provide converters for YYYY MM DD\n                extension - filename extension\n\
+      \                logtime - how often to log, in seconds\n                fmtstr\
+      \ - formatter for data values -- most provide converters for both values\n \
+      \               nchan - number of interleaved channels on input\"\"\"\n    \
+      \            \n                \n\n    def __init__(self, formatter=None, filepat=\"\
+      foonly-%d%d%d\", extension=\".csv\", \n        logtime=10,fmtstr=\"%11.9f\"\
+      ,nchan=1,localtime=False,longitude=-76.03, legend=None):  # only default arguments\
+      \ here\n        \"\"\"arguments to this function show up as parameters in GRC\"\
+      \"\"\n        gr.sync_block.__init__(\n            self,\n            name='BAA:Data\
+      \ Logger',   # will show up in GRC\n            in_sig=[np.float32],\n     \
+      \       out_sig=None\n        )\n        # if an attribute with the same name\
+      \ as a parameter is found,\n        # a callback is registered (properties work,\
+      \ too).\n        \n        #\n        # Formatter is a function pointer--very\
+      \ often 'None'\n        #\n        self.formatter = formatter\n        \n  \
+      \      #\n        # Controls the template for filename generation\n        #\n\
+      \        self.filepat= filepat\n        \n        #\n        # The filename\
+      \ extension\n        #\n        self.extension=extension\n        \n       \
+      \ #\n        # The logging interval\n        #\n        self.logtime=logtime\n\
+      \        \n        \n        #\n        # The data-item formatting string\n\
+      \        #      \n        self.fmtstr = fmtstr\n        \n        #\n      \
+      \  # How many (interleaved) channels\n        self.nchan = nchan\n        \n\
+      \        #\n        # Use local time, rather than UTC/GMT?\n        #\n    \
+      \    self.localtime = localtime\n        \n        #\n        # The averaing\
+      \ cells\n        #\n        self.avg = [0.0]*nchan\n        self.acnt = [0]*nchan\n\
+      \n        \n        #\n        # Keep track of the next channel's averaging\
+      \ cell we\n        #  need to update\n        #\n        self.cndx = 0\n   \
+      \     \n        \n        #\n        # This isn't strictly required, since the\
+      \ work function code\n        #  will take care of whatever items it gets presented\
+      \ with.\n        #\n        self.set_output_multiple(nchan)\n        \n    \
+      \    self.now = time.time()\n        \n        self.longitude = longitude\n\
+      \        \n        self.legend = legend\n        \n        self.legcount = 0\n\
+      \        self.fn = \"\"\n        self.curlegend = legend\n\n    def work(self,\
+      \ input_items, output_items):\n        \n        if (self.localtime == False):\n\
+      \            ltp = time.gmtime()\n        else:\n            ltp = time.localtime()\n\
+      \        \n        #\n        # Distribute the input items over the averaging\
+      \ buffer as appropriate\n        #  We assume that the input is interleaved\
+      \ by 'nchan'\n        #  We use 'self.cndx' to keep track of which channel's\
+      \ averaging\n        #  cell we need to put the next value in.\n        #\n\
+      \        # Because GR's scheduler has no idea what our internal \"shape\"\n\
+      \        #  is, it can hand us many, or a few, items, every time we're\n   \
+      \     #  called.\n        #\n        for x in range(len(input_items[0])):\n\
+      \            self.avg[self.cndx % self.nchan] += input_items[0][x]\n       \
+      \     self.acnt[self.cndx % self.nchan] += 1\n            \n            #\n\
+      \            # Increment and modularly reduce cndx\n            #\n        \
+      \    self.cndx += 1\n            self.cndx %= self.nchan\n            \n\n \
+      \       if ((time.time() - self.now) > self.logtime):\n            self.now\
+      \ = time.time()\n            if (self.formatter == None):\n                fn\
+      \ = self.filepat % (ltp.tm_year, ltp.tm_mon, ltp.tm_mday) + self.extension\n\
+      \                fp = open(fn, \"a\")\n                #\n                #\
+      \ Filename has changed (new date) or\n                #  legend has changed\
+      \ (new DEC/FREQ/BW) or\n                #  legcount >= 30\n                #\n\
+      \                wrlegend = False\n                if (self.fn != fn):\n   \
+      \                 self.fn = fn\n                    wrlegend = True\n      \
+      \          elif (self.curlegend != self.legend):\n                    self.curlegend\
+      \ = self.legend\n                    wrlegend = True\n                elif (self.legcount\
+      \ >= 30):\n                    #wrlegend = True\n                    self.legcount\
+      \ = 0\n                if (wrlegend == True and self.legend != None):\n    \
+      \                self.legcount = 0\n                    fp.write(\"INFO:%s\\\
+      n\" % self.legend)\n                    \n                fp.write(\"%02d:%02d:%02d,\"\
+      \ % (ltp.tm_hour, ltp.tm_min, ltp.tm_sec))\n                lmst = ra_funcs.cur_sidereal(self.longitude)\n\
+      \                lmst = lmst.replace(\",\",\":\")\n                fp.write(\"\
+      %s,\" % lmst)\n                for x in range(self.nchan):\n               \
+      \     self.avg[x] /= self.acnt[x]\n                    self.acnt[x] = 1\n  \
+      \                  fp.write (self.fmtstr  % (self.avg[x]))\n               \
+      \     if (x < self.nchan-1):\n                        fp.write(\",\")\n    \
+      \            fp.write(\"\\n\")\n                self.legcount += 1\n       \
+      \         \n                    \n                fp.close()\n  \n         \
+      \   else:\n                self.formatter(self.filepat,self.extension,self.avg[0],self.avg[1])\n\
+      \            \n        return len(input_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    extension: '''.csv'''
+    filepat: '''tp-%04d%02d%02d''+''_''+prefix'
+    fmtstr: '''%11.9f'''
+    formatter: None
+    legend: '"GMT,LMST,TP,DEC=%f,LONGITUDE=%f,LATITUDE=%f,AMSL=%f,FREQ=%f,BW=%f" %
+      (decln,longitude,latitude,amsl,ifreq/1.0e6, srate/1.0e6)'
+    localtime: False if utc != 0 else True
+    logtime: logtime
+    longitude: Longitude
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+  states:
+    _io_cache: ('BAA:Data Logger', 'blk', [('formatter', 'None'), ('filepat', "'foonly-%d%d%d'"),
+      ('extension', "'.csv'"), ('logtime', '10'), ('fmtstr', "'%11.9f'"), ('nchan',
+      '1'), ('localtime', 'False'), ('longitude', '-76.03'), ('legend', 'None')],
+      [('0', 'float', 1)], [], 'A slow data textual formatter\n          inputs are
+      expected to be science-data\n             Parameters:\n                formatter
+      - pointer to a custom formatter function\n                filepat - pattern
+      used for formatting filename must provide converters for YYYY MM DD\n                extension
+      - filename extension\n                logtime - how often to log, in seconds\n                fmtstr
+      - formatter for data values -- most provide converters for both values\n                nchan
+      - number of interleaved channels on input', ['extension', 'filepat', 'fmtstr',
+      'formatter', 'legend', 'localtime', 'logtime', 'longitude', 'nchan'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2712, 16.0]
+    rotation: 0
+    state: enabled
+- name: freq
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: RF Frequency (Hz)
+    short_id: ''
+    type: eng_float
+    value: 1420.4058e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 580.0]
+    rotation: 0
+    state: true
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import ra_funcs
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [344, 40.0]
+    rotation: 0
+    state: true
+- name: import_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [528, 40.0]
+    rotation: 0
+    state: true
+- name: import_0_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import time
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 40.0]
+    rotation: 0
+    state: true
+- name: logtime
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Logging Interval (secs)
+    short_id: ''
+    type: eng_float
+    value: '5.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1104, 572.0]
+    rotation: 0
+    state: true
+- name: longitude
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Longitude
+    short_id: ''
+    type: eng_float
+    value: '2.55'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [968, 572.0]
+    rotation: 0
+    state: true
+- name: note_0
+  id: note
+  parameters:
+    alias: ''
+    comment: 'The spectral sub-graph
+
+      Compute the mag^2
+
+      Integrate
+
+      Decimate down to "data_rate"'
+    note: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 424.0]
+    rotation: 0
+    state: true
+- name: note_0_0
+  id: note
+  parameters:
+    alias: ''
+    comment: 'The total-power sub-graph
+
+      Compute mag^2 for both inputs
+
+      (East and West)
+
+      Provide East and West outputs
+
+      as well as sum and difference'
+    note: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 16.0]
+    rotation: 0
+    state: true
+- name: note_2
+  id: note
+  parameters:
+    alias: ''
+    comment: 'There are 32-bit-float numerical
+
+      issues when using very-small ALPHA
+
+      values in the IIR.
+
+      So, we do the integration in two stages.'
+    note: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1584, 48.0]
+    rotation: 0
+    state: true
+- name: osmosdr_source_1
+  id: osmosdr_source
+  parameters:
+    affinity: ''
+    alias: ''
+    ant0: ''
+    ant1: ''
+    ant10: ''
+    ant11: ''
+    ant12: ''
+    ant13: ''
+    ant14: ''
+    ant15: ''
+    ant16: ''
+    ant17: ''
+    ant18: ''
+    ant19: ''
+    ant2: ''
+    ant20: ''
+    ant21: ''
+    ant22: ''
+    ant23: ''
+    ant24: ''
+    ant25: ''
+    ant26: ''
+    ant27: ''
+    ant28: ''
+    ant29: ''
+    ant3: ''
+    ant30: ''
+    ant31: ''
+    ant4: ''
+    ant5: ''
+    ant6: ''
+    ant7: ''
+    ant8: ''
+    ant9: ''
+    args: '""'
+    bb_gain0: '20'
+    bb_gain1: '20'
+    bb_gain10: '20'
+    bb_gain11: '20'
+    bb_gain12: '20'
+    bb_gain13: '20'
+    bb_gain14: '20'
+    bb_gain15: '20'
+    bb_gain16: '20'
+    bb_gain17: '20'
+    bb_gain18: '20'
+    bb_gain19: '20'
+    bb_gain2: '20'
+    bb_gain20: '20'
+    bb_gain21: '20'
+    bb_gain22: '20'
+    bb_gain23: '20'
+    bb_gain24: '20'
+    bb_gain25: '20'
+    bb_gain26: '20'
+    bb_gain27: '20'
+    bb_gain28: '20'
+    bb_gain29: '20'
+    bb_gain3: '20'
+    bb_gain30: '20'
+    bb_gain31: '20'
+    bb_gain4: '20'
+    bb_gain5: '20'
+    bb_gain6: '20'
+    bb_gain7: '20'
+    bb_gain8: '20'
+    bb_gain9: '20'
+    bw0: '0'
+    bw1: '0'
+    bw10: '0'
+    bw11: '0'
+    bw12: '0'
+    bw13: '0'
+    bw14: '0'
+    bw15: '0'
+    bw16: '0'
+    bw17: '0'
+    bw18: '0'
+    bw19: '0'
+    bw2: '0'
+    bw20: '0'
+    bw21: '0'
+    bw22: '0'
+    bw23: '0'
+    bw24: '0'
+    bw25: '0'
+    bw26: '0'
+    bw27: '0'
+    bw28: '0'
+    bw29: '0'
+    bw3: '0'
+    bw30: '0'
+    bw31: '0'
+    bw4: '0'
+    bw5: '0'
+    bw6: '0'
+    bw7: '0'
+    bw8: '0'
+    bw9: '0'
+    clock_source0: ''
+    clock_source1: ''
+    clock_source2: ''
+    clock_source3: ''
+    clock_source4: ''
+    clock_source5: ''
+    clock_source6: ''
+    clock_source7: ''
+    comment: ''
+    corr0: '0'
+    corr1: '0'
+    corr10: '0'
+    corr11: '0'
+    corr12: '0'
+    corr13: '0'
+    corr14: '0'
+    corr15: '0'
+    corr16: '0'
+    corr17: '0'
+    corr18: '0'
+    corr19: '0'
+    corr2: '0'
+    corr20: '0'
+    corr21: '0'
+    corr22: '0'
+    corr23: '0'
+    corr24: '0'
+    corr25: '0'
+    corr26: '0'
+    corr27: '0'
+    corr28: '0'
+    corr29: '0'
+    corr3: '0'
+    corr30: '0'
+    corr31: '0'
+    corr4: '0'
+    corr5: '0'
+    corr6: '0'
+    corr7: '0'
+    corr8: '0'
+    corr9: '0'
+    dc_offset_mode0: '0'
+    dc_offset_mode1: '0'
+    dc_offset_mode10: '0'
+    dc_offset_mode11: '0'
+    dc_offset_mode12: '0'
+    dc_offset_mode13: '0'
+    dc_offset_mode14: '0'
+    dc_offset_mode15: '0'
+    dc_offset_mode16: '0'
+    dc_offset_mode17: '0'
+    dc_offset_mode18: '0'
+    dc_offset_mode19: '0'
+    dc_offset_mode2: '0'
+    dc_offset_mode20: '0'
+    dc_offset_mode21: '0'
+    dc_offset_mode22: '0'
+    dc_offset_mode23: '0'
+    dc_offset_mode24: '0'
+    dc_offset_mode25: '0'
+    dc_offset_mode26: '0'
+    dc_offset_mode27: '0'
+    dc_offset_mode28: '0'
+    dc_offset_mode29: '0'
+    dc_offset_mode3: '0'
+    dc_offset_mode30: '0'
+    dc_offset_mode31: '0'
+    dc_offset_mode4: '0'
+    dc_offset_mode5: '0'
+    dc_offset_mode6: '0'
+    dc_offset_mode7: '0'
+    dc_offset_mode8: '0'
+    dc_offset_mode9: '0'
+    freq0: actual_freq
+    freq1: 100e6
+    freq10: 100e6
+    freq11: 100e6
+    freq12: 100e6
+    freq13: 100e6
+    freq14: 100e6
+    freq15: 100e6
+    freq16: 100e6
+    freq17: 100e6
+    freq18: 100e6
+    freq19: 100e6
+    freq2: 100e6
+    freq20: 100e6
+    freq21: 100e6
+    freq22: 100e6
+    freq23: 100e6
+    freq24: 100e6
+    freq25: 100e6
+    freq26: 100e6
+    freq27: 100e6
+    freq28: 100e6
+    freq29: 100e6
+    freq3: 100e6
+    freq30: 100e6
+    freq31: 100e6
+    freq4: 100e6
+    freq5: 100e6
+    freq6: 100e6
+    freq7: 100e6
+    freq8: 100e6
+    freq9: 100e6
+    gain0: '40'
+    gain1: '10'
+    gain10: '10'
+    gain11: '10'
+    gain12: '10'
+    gain13: '10'
+    gain14: '10'
+    gain15: '10'
+    gain16: '10'
+    gain17: '10'
+    gain18: '10'
+    gain19: '10'
+    gain2: '10'
+    gain20: '10'
+    gain21: '10'
+    gain22: '10'
+    gain23: '10'
+    gain24: '10'
+    gain25: '10'
+    gain26: '10'
+    gain27: '10'
+    gain28: '10'
+    gain29: '10'
+    gain3: '10'
+    gain30: '10'
+    gain31: '10'
+    gain4: '10'
+    gain5: '10'
+    gain6: '10'
+    gain7: '10'
+    gain8: '10'
+    gain9: '10'
+    gain_mode0: 'False'
+    gain_mode1: 'False'
+    gain_mode10: 'False'
+    gain_mode11: 'False'
+    gain_mode12: 'False'
+    gain_mode13: 'False'
+    gain_mode14: 'False'
+    gain_mode15: 'False'
+    gain_mode16: 'False'
+    gain_mode17: 'False'
+    gain_mode18: 'False'
+    gain_mode19: 'False'
+    gain_mode2: 'False'
+    gain_mode20: 'False'
+    gain_mode21: 'False'
+    gain_mode22: 'False'
+    gain_mode23: 'False'
+    gain_mode24: 'False'
+    gain_mode25: 'False'
+    gain_mode26: 'False'
+    gain_mode27: 'False'
+    gain_mode28: 'False'
+    gain_mode29: 'False'
+    gain_mode3: 'False'
+    gain_mode30: 'False'
+    gain_mode31: 'False'
+    gain_mode4: 'False'
+    gain_mode5: 'False'
+    gain_mode6: 'False'
+    gain_mode7: 'False'
+    gain_mode8: 'False'
+    gain_mode9: 'False'
+    if_gain0: '20'
+    if_gain1: '20'
+    if_gain10: '20'
+    if_gain11: '20'
+    if_gain12: '20'
+    if_gain13: '20'
+    if_gain14: '20'
+    if_gain15: '20'
+    if_gain16: '20'
+    if_gain17: '20'
+    if_gain18: '20'
+    if_gain19: '20'
+    if_gain2: '20'
+    if_gain20: '20'
+    if_gain21: '20'
+    if_gain22: '20'
+    if_gain23: '20'
+    if_gain24: '20'
+    if_gain25: '20'
+    if_gain26: '20'
+    if_gain27: '20'
+    if_gain28: '20'
+    if_gain29: '20'
+    if_gain3: '20'
+    if_gain30: '20'
+    if_gain31: '20'
+    if_gain4: '20'
+    if_gain5: '20'
+    if_gain6: '20'
+    if_gain7: '20'
+    if_gain8: '20'
+    if_gain9: '20'
+    iq_balance_mode0: '0'
+    iq_balance_mode1: '0'
+    iq_balance_mode10: '0'
+    iq_balance_mode11: '0'
+    iq_balance_mode12: '0'
+    iq_balance_mode13: '0'
+    iq_balance_mode14: '0'
+    iq_balance_mode15: '0'
+    iq_balance_mode16: '0'
+    iq_balance_mode17: '0'
+    iq_balance_mode18: '0'
+    iq_balance_mode19: '0'
+    iq_balance_mode2: '0'
+    iq_balance_mode20: '0'
+    iq_balance_mode21: '0'
+    iq_balance_mode22: '0'
+    iq_balance_mode23: '0'
+    iq_balance_mode24: '0'
+    iq_balance_mode25: '0'
+    iq_balance_mode26: '0'
+    iq_balance_mode27: '0'
+    iq_balance_mode28: '0'
+    iq_balance_mode29: '0'
+    iq_balance_mode3: '0'
+    iq_balance_mode30: '0'
+    iq_balance_mode31: '0'
+    iq_balance_mode4: '0'
+    iq_balance_mode5: '0'
+    iq_balance_mode6: '0'
+    iq_balance_mode7: '0'
+    iq_balance_mode8: '0'
+    iq_balance_mode9: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nchan: '1'
+    num_mboards: '1'
+    sample_rate: samp_rate
+    sync: none
+    time_source0: ''
+    time_source1: ''
+    time_source2: ''
+    time_source3: ''
+    time_source4: ''
+    time_source5: ''
+    time_source6: ''
+    time_source7: ''
+    type: fc32
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 172.0]
+    rotation: 0
+    state: enabled
+- name: pacer_probe
+  id: blocks_probe_signal_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2104, 280.0]
+    rotation: 0
+    state: true
+- name: qtgui_vector_sink_f_0
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1'
+    alpha10: '1.0'
+    alpha2: '1'
+    alpha3: '1'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'True'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"magenta"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'True'
+    gui_hint: Main@0:6,0,1,4
+    label1: Sky
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: Detector(West)
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Total Power (Daily)"'
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'False'
+    update_time: 1.0/(data_rate)
+    vlen: '86400'
+    width1: '2'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '2'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"Drift Time  (Hours)"'
+    x_start: '0'
+    x_step: -(1/3600)
+    x_units: ''
+    y_axis_label: '"Detector Power"'
+    y_units: '""'
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2736, 344.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_vector_sink_f_1
+  id: qtgui_vector_sink_f
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'True'
+    average: '1.0'
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    grid: 'True'
+    gui_hint: Main@0:4,0,1,4
+    label1: '"Spectrum"'
+    label10: ''
+    label2: '"Spectrum"'
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Doppler Velocity" if (velocity == 1) else "Frequency"'
+    nconnections: '1'
+    ref_level: '0'
+    showports: 'True'
+    update_time: 1.0/(data_rate)
+    vlen: fftsize
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    x_axis_label: '"Red shift(km/s)"  if (velocity == 1) else  "Frequency (MHz)"'
+    x_start: doplow if (velocity == True) else freqlow
+    x_step: ((dophigh-doplow)/fftsize) if (velocity == 1) else freqstep
+    x_units: '"km/s" if (velocity == 1) else "MHz"'
+    y_axis_label: Rel power (dB)
+    y_units: dB
+    ymax: '10'
+    ymin: '-100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2744, 528.0]
+    rotation: 0
+    state: true
+- name: rfgain
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: RF Gain (dB)
+    short_id: ''
+    type: eng_float
+    value: '49'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 580.0]
+    rotation: 0
+    state: true
+- name: single_pole_iir_filter_xx_0
+  id: single_pole_iir_filter_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: ra_funcs.getalpha(1.0/itinteg,samp_rate/split_ratio)
+    comment: A simple filter/integrator
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1768, 176.0]
+    rotation: 0
+    state: enabled
+- name: single_pole_iir_filter_xx_1
+  id: single_pole_iir_filter_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: ra_funcs.getalpha(1.0/isinteg,fftrate)
+    comment: Integrate
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: fftsize
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1624, 328.0]
+    rotation: 0
+    state: true
+- name: sinteg
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Integraton Time(secs) for Spectrum
+    short_id: ''
+    type: eng_float
+    value: '60.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 572.0]
+    rotation: 0
+    state: true
+- name: srate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Sample Rate (SPS)
+    short_id: ''
+    type: eng_float
+    value: 2.50e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [208, 580.0]
+    rotation: 0
+    state: true
+- name: stripchart_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\nimport time\n\n\nclass blk(gr.basic_block):  # other\
+      \ base classes are basic_block, decim_block, interp_block\n    \"\"\"A strip\
+      \ chart takes in a stream of floats and produces a 1 hour long\n       strip-chart\
+      \ as output\n       \n       Params:\n          decim - how much to decimate\
+      \ input to produce 1 SPS\n          daily - how many daily long is the stripchart\
+      \ vector\n    \"\"\"\n\n    def __init__(self, decim=100,daily=86400):  # only\
+      \ default arguments here\n        \"\"\"arguments to this function show up as\
+      \ parameters in GRC\"\"\"\n        gr.basic_block.__init__(\n            self,\n\
+      \            name='Strip Chart daily',   # will show up in GRC\n           \
+      \ in_sig=[np.float32],\n            out_sig=[(np.float32,daily)]\n        )\n\
+      \        # if an attribute with the same name as a parameter is found,\n   \
+      \     # a callback is registered (properties work, too).\n        \n       \
+      \ #\n        # How much do we need to average the input to produce a 1SPS\n\
+      \        #  output?\n        #\n        self.decim = decim\n        \n     \
+      \   #\n        # The stripchart vector itself--must be persistent in the\n \
+      \       #  object instance\n        #\n        self.strip = [0.0]*daily\n  \
+      \      \n        #\n        # keeps track of decimation\n        #\n       \
+      \ self.counter = 0\n        \n        #\n        # We continuously average the\
+      \ input and store it here\n        #\n        self.avg = 0.0\n\n    def general_work(self,\
+      \ input_items, output_items):\n        \"\"\"take an input item(s), place appropriately\
+      \ in stripchart output\"\"\"\n \n        #\n        # Our averager hasn't been\
+      \ initialized with a\n        #  \"prime the pump\" value?\n        # Do it\
+      \ now.\n        #\n        if (self.avg == 0.0):\n            self.avg = input_items[0][0]\n\
+      \            self.counter = 0\n            #\n            # Also init the strip-chart\
+      \ to this level\n            #\n            self.strip = [self.avg]*len(self.strip)\n\
+      \        #\n        # For each of the input items\n        #\n        for x\
+      \ in range(len(input_items[0])):\n            #\n            # Effectively we\
+      \ get a N-point moving average\n            # WHere \"N\" is \"decim\"\n   \
+      \         #\n            self.avg += input_items[0][x]\n            self.counter\
+      \ += 1\n            \n            #\n            # Time to output an item into\
+      \ the stripchart\n            #\n            if (self.counter >= self.decim):\n\
+      \                \n                #\n                # Reduce by decim\n  \
+      \              #\n                self.avg /= self.counter\n               \
+      \ \n                #\n                # Use python array notation to effect\
+      \ a quick\n                #  shift of items in the stripchart array\n     \
+      \           #\n                self.strip = [self.avg] + self.strip[:-1]\n \
+      \               self.counter = 0\n                self.avg = 1.0e-15\n     \
+      \   #\n        # Stuff output items with the contents of the \n        #  possibly-updated\
+      \ stripchart\n        #\n        for y in range(len(output_items[0])):\n   \
+      \         output_items[0][y] = self.strip\n        \n        #\n        # Tell\
+      \ scheduler we consumed items\n        #\n        self.consume(0, len(input_items[0]))\n\
+      \        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: Produces a "stripchart" type vector
+    daily: '86400'
+    decim: data_rate
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('Strip Chart daily', 'blk', [('decim', '100'), ('daily', '86400')],
+      [('0', 'float', 1)], [('0', 'float', 86400)], 'A strip chart takes in a stream
+      of floats and produces a 1 hour long\n       strip-chart as output\n       \n       Params:\n          decim
+      - how much to decimate input to produce 1 SPS\n          daily - how many daily
+      long is the stripchart vector\n    ', ['decim'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2360, 408.0]
+    rotation: 0
+    state: enabled
+- name: tinteg
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Integraton Time(secs) for TP
+    short_id: ''
+    type: eng_float
+    value: '60'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1496, 692.0]
+    rotation: 0
+    state: true
+- name: utc
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Log in UTC time
+    short_id: ''
+    type: intx
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1304, 572.0]
+    rotation: 0
+    state: true
+- name: vectorlogger
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"\nEmbedded Python Blocks:\n\nEach time this file is saved,\
+      \ GRC will instantiate the first class it finds\nto get ports and parameters\
+      \ of your block. The arguments to __init__  will\nbe the parameters. All of\
+      \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
+      from gnuradio import gr\nimport time\nimport ra_funcs\n\nclass blk(gr.sync_block):\
+      \  # other base classes are basic_block, decim_block, interp_block\n    \"\"\
+      \"Logging of vectors (like FFT outputs)\n          fftsize - size of fft vector\
+      \ to log\n          formetter - formatter function pointer\n          filepat\
+      \ - pattern for beginning of filenaem\n          extension - file extension\n\
+      \          logtime - how often to log (seconds)\n          fmtstr - format string\
+      \ for data values\n          localtime - whether to use local or UTC time\n\
+      \          fftshift - whether to shift FFT vector before logging\n         \
+      \ longitude  - local longitude in decimal form\n    \"\"\"\n\n    def __init__(self,\
+      \ fftsize=2048, formatter=None, filepat=\"foonly-%04d%02d%02d\", extension=\"\
+      .csv\",\n        logtime=10, fmtstr=\"%11.9f\", localtime=False, fftshift=False,longitude=-76.03):\
+      \  # only default arguments here\n        \"\"\"arguments to this function show\
+      \ up as parameters in GRC\"\"\"\n        gr.sync_block.__init__(\n         \
+      \   self,\n            name='Vector Logger',   # will show up in GRC\n     \
+      \         in_sig=[(np.float32,fftsize)],\n            out_sig=None\n       \
+      \ )\n        \n        self.formatter = formatter\n        self.filepat = filepat\n\
+      \        self.extension = extension\n        self.logtime = logtime\n      \
+      \  self.fmtstr = fmtstr\n        self.localtime = localtime\n        self.vecavg\
+      \ = np.zeros(fftsize)\n        self.now = time.time()\n        self.fftshift\
+      \ = fftshift\n        self.longitude = longitude\n\n        \n\n    def work(self,\
+      \ input_items, output_items):\n        \"\"\"Log a vector into a file\"\"\"\n\
+      \        for x in range(len(input_items[0])):\n            self.vecavg = np.add(self.vecavg,\
+      \ input_items[0][x])\n            self.vecavg = np.divide(self.vecavg, [2.0]*len(self.vecavg))\n\
+      \        \n        #\n        # If time to log\n        #\n        if (time.time()\
+      \ - self.now >= self.logtime):\n            self.now = time.time()\n       \
+      \     #\n            # Decide on localtime or gmtime\n            #\n      \
+      \      if (self.localtime == True):\n                ltp = time.localtime()\n\
+      \            else:\n                ltp = time.gmtime()\n            \n    \
+      \        #\n            # If they specified a formatter function call it instead\n\
+      \            #\n            if (self.formatter != None):\n                self.formatter(self.vecavg,self.filepat,self.extension)\n\
+      \            \n            #\n            # Otherwise, do it here\n        \
+      \    #\n            else:\n                #\n                # Open the output\
+      \ file, with a name according to the filepat\n                #  specified\n\
+      \                #\n                fp = open(self.filepat % (ltp.tm_year, ltp.tm_mon,\
+      \ ltp.tm_mday) + self.extension, \"a\")\n                \n                #\n\
+      \                # Write record header\n                #\n                fp.write\
+      \ (\"%02d:%02d:%02d, \" % (ltp.tm_hour, ltp.tm_min, ltp.tm_sec))\n         \
+      \       lmst = ra_funcs.cur_sidereal(self.longitude)\n                lmst =\
+      \ lmst.replace(\",\",\":\")\n                fp.write(\"%s,\" % lmst)\n    \
+      \            # fp.write (\"%s,\" % ra_funcs.cur_sidereal(self.longitude))  \
+      \          \n                #\n                # Write each of the data items\
+      \ in the input vector\n                #\n                \n               \
+      \ #\n                # Check if they want us to  do an FFTSHIFT operation\n\
+      \                #  (to  normalize the ordering of FFTW3 outputs)\n        \
+      \        #\n                if (self.fftshift == True):\n                  \
+      \  l = len(self.vecavg)\n                    l1 = list(self.vecavg[int(l/2):])\n\
+      \                    l2 = list(self.vecavg[0:int(l/2)])\n                  \
+      \  lout = l1 + l2\n                    lout = np.array(lout)\n             \
+      \   else:\n                    lout = self.vecavg\n                for x in\
+      \ range(len(self.vecavg)):\n                    fp.write(self.fmtstr % lout[x])\n\
+      \                    if (x < len(self.vecavg)-1):\n                        fp.write(\"\
+      ,\")\n                fp.write(\"\\n\")\n                fp.close()\n      \
+      \      \n            \n        return len(input_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    extension: '''.csv'''
+    fftshift: 'False'
+    fftsize: fftsize
+    filepat: '''fft-%04d%02d%02d''+''_''+prefix'
+    fmtstr: '''%6.2f'''
+    formatter: None
+    localtime: False if utc != 0 else True
+    logtime: logtime*3
+    longitude: longitude
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('Vector Logger', 'blk', [('fftsize', '2048'), ('formatter', 'None'),
+      ('filepat', "'foonly-%04d%02d%02d'"), ('extension', "'.csv'"), ('logtime', '10'),
+      ('fmtstr', "'%11.9f'"), ('localtime', 'False'), ('fftshift', 'False'), ('longitude',
+      '-76.03')], [('0', 'float', 2048)], [], 'Logging of vectors (like FFT outputs)\n          fftsize
+      - size of fft vector to log\n          formetter - formatter function pointer\n          filepat
+      - pattern for beginning of filenaem\n          extension - file extension\n          logtime
+      - how often to log (seconds)\n          fmtstr - format string for data values\n          localtime
+      - whether to use local or UTC time\n          fftshift - whether to shift FFT
+      vector before logging\n          longitude  - local longitude in decimal form\n    ',
+      ['extension', 'fftshift', 'filepat', 'fmtstr', 'formatter', 'localtime', 'logtime',
+      'longitude'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2736, 736.0]
+    rotation: 0
+    state: enabled
+- name: vf
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: ''
+    short_id: ''
+    type: intx
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1376, 708.0]
+    rotation: 0
+    state: enabled
+- name: virtual_sink_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: rf1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 264.0]
+    rotation: 0
+    state: true
+- name: virtual_source_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: rf1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 336.0]
+    rotation: 0
+    state: true
+- name: virtual_source_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: rf1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 176.0]
+    rotation: 0
+    state: true
+
+connections:
+- [baseline_compensate, '0', blocks_nlog10_ff_0, '0']
+- [blocks_complex_to_mag_squared_0, '0', blocks_integrate_xx_0, '0']
+- [blocks_complex_to_mag_squared_1, '0', single_pole_iir_filter_xx_1, '0']
+- [blocks_integrate_xx_0, '0', blocks_multiply_const_xx_0, '0']
+- [blocks_keep_one_in_n_0, '0', formatter, '0']
+- [blocks_keep_one_in_n_0, '0', stripchart_0, '0']
+- [blocks_keep_one_in_n_1, '0', baseline_compensate, '0']
+- [blocks_multiply_const_xx_0, '0', single_pole_iir_filter_xx_0, '0']
+- [blocks_nlog10_ff_0, '0', blocks_selector_0, '0']
+- [blocks_nlog10_ff_0, '0', flipper, '0']
+- [blocks_selector_0, '0', blocks_null_sink_0, '0']
+- [blocks_selector_0, '1', vectorlogger, '0']
+- [blocks_selector_0, '2', ezRAvectorlogger, '0']
+- [blocks_stream_to_vector_0, '0', fft_vxx_0, '0']
+- [fft_vxx_0, '0', blocks_complex_to_mag_squared_1, '0']
+- [flipper, '0', qtgui_vector_sink_f_1, '0']
+- [osmosdr_source_1, '0', virtual_sink_0, '0']
+- [single_pole_iir_filter_xx_0, '0', blocks_keep_one_in_n_0, '0']
+- [single_pole_iir_filter_xx_0, '0', pacer_probe, '0']
+- [single_pole_iir_filter_xx_1, '0', blocks_keep_one_in_n_1, '0']
+- [stripchart_0, '0', qtgui_vector_sink_f_0, '0']
+- [virtual_source_0, '0', blocks_stream_to_vector_0, '0']
+- [virtual_source_0_0, '0', blocks_complex_to_mag_squared_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.9.2
