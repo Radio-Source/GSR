@@ -128,7 +128,7 @@ git clone https://github.com/Radio-Source/GSR/
 
 Goto in your Documents in GSR subdir and gsr subdir
 
-Copy ra_funcs.py file to Scrpits radioconda subdir.
+Copy **ra_funcs.py** file to Scrpits radioconda subdir.
 Radioconda is in your users space subdir
 example for me user name is "smrt" in this screeshot
 ![gsr3](https://github.com/user-attachments/assets/2be19355-84a0-4c53-b76e-0716f2475386)
