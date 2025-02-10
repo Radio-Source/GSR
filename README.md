@@ -38,6 +38,8 @@ Prerequisite Installation
 
 There are certain prerequisites for the **gsr** software that must be satisfied before installing the software.
 
+**- FOR LINUX -**
+
 1.  ### Development Tools
 
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
@@ -62,30 +64,27 @@ pip install --user ephem --break-system-packages
 sudo apt-get install gnuradio gnuradio*
 ```
 
-``` {.western style="margin-left: 0.38in"}
-```
-
-Application: *spectro\_radiometer*
+**Application: gsr**
 
 In your home directory:
 
 ``` {.western style="margin-left: 0.38in"}
-git clone https://github.com/Radio-Source/SpectroRadiometer
+git clone https://github.com/Radio-Source/GSR
 ```
 
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
-cd SpectroRadiometer
+cd GSR
 ```
 
 1.  ### Invoking spectro\_radiometer
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
-SpectroRadiometer is a Python3 script run by
+gsr is a Python3 script run by
 ```
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
-python3 SpectroRadiometer.py (if you use RTL-SDR with default [args])
+python3 gsr.py (if you use RTL-SDR with default [args])
 ```
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
-python3 SpectroRadiometer.py [args*] --> see documentation for [args] (if you use another type of SDR  and or using some [args] differents)
+python3 gsr.py [args*] --> see documentation for [args] (if you use another type of SDR  and or using some [args] differents)
 ```
 
 
