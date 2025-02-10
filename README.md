@@ -128,8 +128,12 @@ Radioconda is in your users space subdir
 example for me user name is "smrt" in this screeshot
 ![gsr3](https://github.com/user-attachments/assets/a004538a-ffb2-476b-8e5a-d793e91df600)
 
-Then reboot Windows to load ra_funcs at start of radioconda next time
+Then reboot Windows to load ra_funcs.py at start of radioconda next time
 
+And open Gnuradio
+![new_gr-radio_astro-gnuradio-windows](https://github.com/user-attachments/assets/50c4f9af-4b2e-4279-a47d-4376f44cce75)
+
+In file menu goto /Documents/GSR/gsr/ directory and open "gsr.grc" then run flowgraph
 
 
 
