@@ -158,4 +158,6 @@ Antenna orientation parameters, for the moment we have chosen that the antenna o
 
 You can choice Frequency file type .csv or ezRA type (txt)
 
-ezRA file have header ezRA compatible, directly usable with ezCon
+ezRA file have header ezRA compatible, directly usable with ezCon see https://github.com/tedcline/ezRA/
+
+
