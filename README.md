@@ -132,6 +132,7 @@ example for me user name is "smrt" in this screeshot
 Then reboot Windows to load ra_funcs.py at start of radioconda next time
 
 And open Gnuradio
+
 ![new_gr-radio_astro-gnuradio-windows](https://github.com/user-attachments/assets/faffae3b-cf05-425c-b59d-6246b7e8b241)
 
 
