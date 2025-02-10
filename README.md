@@ -143,4 +143,8 @@ In file menu goto /Documents/GSR/gsr/ directory and open "gsr.grc" then run flow
 ![gsr4](https://github.com/user-attachments/assets/b484ef1a-316f-4a34-b809-1db6c2184a0c)
 
 
+You can run directly from CMD shell
+For example on my computer my Users account is smrt
+You can see this command line at run in radioconda
+C:\Users\smrt\radioconda\python.exe -u C:\Users\smrt\Documents\gsr\gsr.py
 
