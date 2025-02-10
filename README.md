@@ -1,6 +1,8 @@
-**Installation and usage: gsr  Gnuradio Spectro Radiometer**
+**Installation and usage: gsr   -  Gnuradio Spectro Radiometer**
 
-Pierre Terrier
+Author : Pierre Terrier
+
+The code is based of baa_seminar gnuradio created by Marcus Leech. 
 
 Introduction
 
