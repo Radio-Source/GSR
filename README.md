@@ -83,7 +83,7 @@ cd GSR
 gsr is a Python3 script run by
 
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
-python3 gsr.py (if you use RTL-SDR with default [args])
+python3 gsr.py 
 ```
 
 But also you run gsr from GnuRadio-Compagnion
