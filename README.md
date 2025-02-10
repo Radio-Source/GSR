@@ -9,6 +9,8 @@ The code is based of baa_seminar gnuradio created by Marcus Leech (CCERA)
 You can see an fork of baa_seminar that have created here : https://github.com/Radio-Source/baa_seminar_fork 
 and youtube video : https://www.youtube.com/watch?v=2awvu_p2-yE
 
+I changed the interface displaying the total power received (display over 1 day) and writing FFT files (spectrum) with a compatible ezRA option
+
 **Introduction**
 
 This document describes the installation, system requirements, and usage of the *Gnu Radio* application known as **gsr** Gnuradio Spectro Radiometer.
