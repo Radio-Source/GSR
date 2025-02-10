@@ -122,7 +122,8 @@ Download git for easy copying my repository https://git-scm.com/downloads/win Af
 git clone https://github.com/Radio-Source/GSR/
 ![gsr2](https://github.com/user-attachments/assets/0a1f7495-0c65-4722-9dec-c1f20a90395a)
 
-Goto in your Documents in GSR subdir
+Goto in your Documents in GSR subdir and gsr subdir
+
 Copy ra_funcs.py file to Scrpits radioconda subdir.
 Radioconda is in your users space subdir
 example for me user name is "smrt" in this screeshot
