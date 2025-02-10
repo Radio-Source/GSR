@@ -3,7 +3,8 @@
 Author : Pierre Terrier
 
 The code is based of baa_seminar gnuradio created by Marcus Leech (CCERA)
-![gsr1](https://github.com/user-attachments/assets/59989b0d-102e-4425-9f3d-82e763c33768)
+![gsr1](https://github.com/user-attachments/assets/950105db-625b-4c65-adda-832d558dfd15)
+
 
 You can see an fork of baa_seminar that have created here : https://github.com/Radio-Source/baa_seminar_fork 
 
