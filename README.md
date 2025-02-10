@@ -131,9 +131,12 @@ example for me user name is "smrt" in this screeshot
 Then reboot Windows to load ra_funcs.py at start of radioconda next time
 
 And open Gnuradio
-![new_gr-radio_astro-gnuradio-windows](https://github.com/user-attachments/assets/50c4f9af-4b2e-4279-a47d-4376f44cce75)
+![gsr3](https://github.com/user-attachments/assets/2be19355-84a0-4c53-b76e-0716f2475386)
+
+
 
 In file menu goto /Documents/GSR/gsr/ directory and open "gsr.grc" then run flowgraph
-![gsr4](https://github.com/user-attachments/assets/55b799ff-f261-448a-94c8-e590d92e479e)
+![gsr4](https://github.com/user-attachments/assets/b484ef1a-316f-4a34-b809-1db6c2184a0c)
+
 
 
