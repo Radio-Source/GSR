@@ -1,4 +1,4 @@
-**Installation and usage: gsr   -  Gnuradio Spectro Radiometer**
+## **Installation and usage: gsr   -  Gnuradio Spectro Radiometer**
 
 Author : Pierre Terrier
 
@@ -40,7 +40,7 @@ Prerequisite Installation
 
 There are certain prerequisites for the **gsr** software that must be satisfied before installing the software.
 
-**- LINUX Install -**
+# **- LINUX Install -**
 
 1.  ### Development Tools
 
@@ -77,8 +77,15 @@ git clone https://github.com/Radio-Source/GSR
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
 cd GSR
 ```
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
+cd gsr
+```
+To copy ra_funcs.py to Python bin
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
+sudo make install
+```
 
-1.  ### Invoking gsr
+2.  ### Invoking gsr
 
 gsr is a Python3 script run by
 
@@ -90,47 +97,44 @@ But also you run gsr from GnuRadio-Compagnion
 
 ------------------------
 
-Windows (10-11) Install
+# - Windows (10-11) Install -
 ------------------------
 Prerequisite Installation  
 
 There are certain prerequisites for the **gsr** software that must be satisfied before installing the software.
 
-1.  ### Development Tools
+1.  ### Prerequisite Tools
 
 Download and install Python 3.12 or 3.13
-``` {.western style="margin-left: 0.38in; font-weight: normal"}
-https://www.python.org/downloads/windows/
-```
+[Python Windows](https://www.python.org/downloads/windows/)
 
 Download and install radioconda (Gnu Radio for Windows)
-``` {.western style="margin-left: 0.38in; font-weight: normal"}
- https://github.com/ryanvolz/radioconda
-```
+[Gnu Radio Windows](https://github.com/ryanvolz/radioconda)
+
 
 Download and install Ephem from binaries for windows
-``` {.western style="margin-left: 0.38in; font-weight: normal"}
-https://pypi.org/project/ephem/#files
-```
+[PyEphem binaries](https://pypi.org/project/ephem/#files)
+
 
 Download and install git for windows
-``` {.western style="margin-left: 0.38in; font-weight: normal"}
-https://git-scm.com/downloads/win
-```
+[Git Windows](https://git-scm.com/downloads/win)
+
 Download git for easy copying my repository https://git-scm.com/downloads/win After install open CMD shell and goto your Documents directory Then type command :
 
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
 git clone https://github.com/Radio-Source/GSR/
+```
 ![gsr2](https://github.com/user-attachments/assets/0a1f7495-0c65-4722-9dec-c1f20a90395a)
 
 Goto in your Documents in GSR subdir and gsr subdir
 
-Copy ra_funcs.py file to Scrpits radioconda subdir.
+Copy **ra_funcs.py** file to Scripts radioconda subdir.
 Radioconda is in your users space subdir
-example for me user name is "smrt" in this screeshot
+example for me user name is "smrt" in this screenshot
 ![gsr3](https://github.com/user-attachments/assets/2be19355-84a0-4c53-b76e-0716f2475386)
 
 
-**Then reboot Windows to load ra_funcs.py at start of radioconda next time**
+<ins>**Then reboot Windows to load ra_funcs.py at start of radioconda next time**</ins>
 
 And open Gnuradio
 
