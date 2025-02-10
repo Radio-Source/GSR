@@ -128,6 +128,8 @@ Radioconda is in your users space subdir
 example for me user name is "smrt" in this screeshot
 ![gsr3](https://github.com/user-attachments/assets/a004538a-ffb2-476b-8e5a-d793e91df600)
 
+Then reboot Windows to load ra_funcs at start of radioconda next time
+
 
 
 
