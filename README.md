@@ -83,9 +83,46 @@ gsr is a Python3 script run by
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
 python3 gsr.py (if you use RTL-SDR with default [args])
 ```
+
+But also you run gsr from GnuRadio-Compagnion
+
+
+
+Windows (10-11) Install
+------------------------
+Prerequisite Installation  
+
+There are certain prerequisites for the **gsr** software that must be satisfied before installing the software.
+
+1.  ### Development Tools
+
+Download and install Python 3.12 or 3.13
 ``` {.western style="margin-left: 0.38in; font-weight: normal"}
-python3 gsr.py [args*] --> see documentation for [args] (if you use another type of SDR  and or using some [args] differents)
+https://www.python.org/downloads/windows/
 ```
+
+Download and install radioconda (Gnu Radio for Windows)
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
+ https://github.com/ryanvolz/radioconda
+```
+
+Download and install Ephem from binaries for windows
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
+https://pypi.org/project/ephem/#files
+```
+
+Download and install git for windows
+``` {.western style="margin-left: 0.38in; font-weight: normal"}
+https://git-scm.com/downloads/win
+```
+
+
+
+
+
+
+
+
 
 
 
