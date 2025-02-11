@@ -163,9 +163,12 @@ You can change some parameters Location, longitude, latitude, amsl (Altitude abo
 
 Antenna orientation parameters, for the moment we have chosen that the antenna only points upwards. It is oriented to the meridian in azimuth
 
-You can choice Frequency file type .csv or ezRA type (txt)
+You can choice Frequency file type .csv or ezRA type (txt)  
+name is fft-yyyymmdd_decln.csv or ezra-yyyymmdd_decln.txt
 
 ezRA file have header ezRA compatible, directly usable with ezCon see https://github.com/tedcline/ezRA/
+
+Total power data is in tp-yyyymmdd_decln.csv  file
 
 
 ![gsr1](https://github.com/user-attachments/assets/53c6b99c-0e2a-451c-ba3c-04b9259ef5fb)
