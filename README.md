@@ -134,9 +134,7 @@ Goto in your Documents in GSR subdir and gsr subdir
 Copy **ra_funcs.py** file to Lib radioconda subdir.
 
 Radioconda is in your users space subdir
-for me my user name is "smrt" C:\Users\smrt\radioconda\Lib\
-example for me user name is "smrt" in this screenshot
-![gsr3](https://github.com/user-attachments/assets/2be19355-84a0-4c53-b76e-0716f2475386)
+Example for me my user name is "smrt"  I copy to C:\Users\smrt\radioconda\Lib\ra_funcs.py
 
 
 <ins>**Then reboot Windows to load ra_funcs.py at start of radioconda next time**</ins>
