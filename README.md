@@ -129,6 +129,9 @@ git clone https://github.com/Radio-Source/GSR/
 ```
 ![gsr2](https://github.com/user-attachments/assets/0a1f7495-0c65-4722-9dec-c1f20a90395a)
 
+
+Use CMD console to install Qt5 with command : pip3 install pyqt5
+
 Goto in your Documents in GSR subdir and gsr subdir
 
 Copy **ra_funcs.py** file to Lib radioconda subdir.
