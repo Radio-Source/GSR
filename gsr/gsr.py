@@ -44,7 +44,7 @@ import threading
 
 class gsr(gr.top_block, Qt.QWidget):
 
-    def __init__(self, dmult=100, freq=1420.4058e6, logtime=5.0, longitude=2.55, rfgain=49, sinteg=60.0, srate=2.50e6, tinteg=60, utc=1, vf=1):
+    def __init__(self, dmult=100, freq=1420.4058e6, logtime=5.0, longitude=2.552186, rfgain=49, sinteg=60.0, srate=2.5e6, tinteg=60, utc=1, vf=1):
         gr.top_block.__init__(self, "Gnuradio Spectro Radiometer", catch_exceptions=True)
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Gnuradio Spectro Radiometer")
@@ -92,7 +92,7 @@ class gsr(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.alt = alt = 30.00
-        self.latitude = latitude = 44.70
+        self.latitude = latitude = 44.695978
         self.altitude = altitude = alt
         self.pacer = pacer = 0.0
         self.decln = decln = altitude-latitude
@@ -149,7 +149,7 @@ class gsr(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self._latitude_range = qtgui.Range(-90.00, 90.00, 0.1, 44.70, 20)
+        self._latitude_range = qtgui.Range(-90.00, 90.00, 0.1, 44.695978, 20)
         self._latitude_win = qtgui.RangeWidget(self._latitude_range, self.set_latitude, "Latitude : ", "counter", float, QtCore.Qt.Horizontal)
         self.Main_grid_layout_0.addWidget(self._latitude_win, 2, 1, 1, 1)
         for r in range(2, 3):
@@ -451,7 +451,7 @@ class gsr(gr.top_block, Qt.QWidget):
         _pacer_thread.daemon = True
         _pacer_thread.start()
         self.osmosdr_source_1 = osmosdr.source(
-            args="numchan=" + str(1) + " " + ""
+            args="numchan=" + str(1) + " " + "airspy=0,bias=1,pack=0"
         )
         self.osmosdr_source_1.set_sample_rate(samp_rate)
         self.osmosdr_source_1.set_center_freq(actual_freq, 0)
@@ -980,7 +980,7 @@ def argument_parser():
         "--logtime", dest="logtime", type=eng_float, default=eng_notation.num_to_str(float(5.0)),
         help="Set Logging Interval (secs) [default=%(default)r]")
     parser.add_argument(
-        "--longitude", dest="longitude", type=eng_float, default=eng_notation.num_to_str(float(2.55)),
+        "--longitude", dest="longitude", type=eng_float, default=eng_notation.num_to_str(float(2.552186)),
         help="Set Longitude [default=%(default)r]")
     parser.add_argument(
         "--rfgain", dest="rfgain", type=eng_float, default=eng_notation.num_to_str(float(49)),
@@ -989,7 +989,7 @@ def argument_parser():
         "--sinteg", dest="sinteg", type=eng_float, default=eng_notation.num_to_str(float(60.0)),
         help="Set Integraton Time(secs) for Spectrum [default=%(default)r]")
     parser.add_argument(
-        "--srate", dest="srate", type=eng_float, default=eng_notation.num_to_str(float(2.50e6)),
+        "--srate", dest="srate", type=eng_float, default=eng_notation.num_to_str(float(2.5e6)),
         help="Set Sample Rate (SPS) [default=%(default)r]")
     parser.add_argument(
         "--tinteg", dest="tinteg", type=eng_float, default=eng_notation.num_to_str(float(60)),

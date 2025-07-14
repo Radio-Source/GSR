@@ -465,7 +465,7 @@ blocks:
     start: '-90.00'
     step: '0.1'
     stop: '90.00'
-    value: '44.70'
+    value: '44.695978'
     widget: counter
   states:
     bus_sink: false
@@ -1356,7 +1356,7 @@ blocks:
     label: Longitude
     short_id: ''
     type: eng_float
-    value: '2.55'
+    value: '2.552186'
   states:
     bus_sink: false
     bus_source: false
@@ -1460,7 +1460,7 @@ blocks:
     ant7: ''
     ant8: ''
     ant9: ''
-    args: '""'
+    args: '"airspy=0,bias=1,pack=0"'
     bb_gain0: '20'
     bb_gain1: '20'
     bb_gain10: '20'
@@ -2021,7 +2021,7 @@ blocks:
     label: Sample Rate (SPS)
     short_id: ''
     type: eng_float
-    value: 2.50e6
+    value: 2.5e6
   states:
     bus_sink: false
     bus_source: false
