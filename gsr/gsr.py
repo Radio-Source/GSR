@@ -488,7 +488,7 @@ class gsr(gr.top_block, Qt.QWidget):
             self.Main_grid_layout_0.setColumnStretch(c, 1)
         self.flipper = flipper.blk(fftsize=fftsize, enabled=False)
         self.fft_vxx_0 = fft.fft_vcc(fftsize, True, window.blackmanharris(fftsize), True, 1)
-        self.ezRAvectorlogger = ezRAvectorlogger.blk(fftsize=fftsize, formatter=None, filepat='ezRA%04d%02d%02d'+'_'+prefix, extension='.txt', logtime=logtime*3, fmtstr='%6.2f', localtime=False if utc != 0 else True, fftshift=False, longitude=longitude, legend="lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty %g" % (latitude,Longitude,amsl,prefix,freqlow,freqhigh,fftsize))
+        self.ezRAvectorlogger = ezRAvectorlogger.blk(fftsize=fftsize, formatter=None, filepat='ezRA%04d%02d%02d'+'_'+prefix, extension='.txt', logtime=logtime*3, fmtstr='%6.2f', localtime=False if utc != 0 else True, fftshift=False, longitude=longitude, legend="lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (latitude,Longitude,amsl,prefix,freqlow,freqhigh,fftsize,azimut,alt))
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, fftsize)
         self.blocks_selector_0 = blocks.selector(gr.sizeof_float*fftsize,0,filechoice)
         self.blocks_selector_0.set_enabled(True)
@@ -643,6 +643,7 @@ class gsr(gr.top_block, Qt.QWidget):
     def set_alt(self, alt):
         self.alt = alt
         self.set_altitude(self.alt)
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
 
     def get_latitude(self):
         return self.latitude
@@ -650,7 +651,7 @@ class gsr(gr.top_block, Qt.QWidget):
     def set_latitude(self, latitude):
         self.latitude = latitude
         self.set_decln(self.altitude-self.latitude)
-        self.ezRAvectorlogger.legend = "lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize)
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
         self.formatter.legend = "GMT,LMST,TP,DEC=%f,LONGITUDE=%f,LATITUDE=%f,AMSL=%f,FREQ=%f,BW=%f" % (self.decln,self.longitude,self.latitude,self.amsl,self.ifreq/1.0e6, self.srate/1.0e6)
 
     def get_altitude(self):
@@ -725,7 +726,7 @@ class gsr(gr.top_block, Qt.QWidget):
         self.set_fftrate(int(self.samp_rate/self.fftsize))
         self.set_freqstep((self.samp_rate/self.fftsize)/1.0e6)
         self.set_winpower(sum([x*x for x in window.blackman_harris(self.fftsize)]))
-        self.ezRAvectorlogger.legend = "lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize)
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
         self.qtgui_vector_sink_f_1.set_x_axis(self.doplow if (self.velocity == True) else self.freqlow, (((self.dophigh-self.doplow)/self.fftsize) if (self.velocity == 1) else self.freqstep))
 
     def get_declnstr(self):
@@ -741,7 +742,7 @@ class gsr(gr.top_block, Qt.QWidget):
     def set_Longitude(self, Longitude):
         self.Longitude = Longitude
         self.set_LMST(ra_funcs.cur_sidereal(self.Longitude+self.tiktok).replace(",",":"))
-        self.ezRAvectorlogger.legend = "lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize)
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
         self.formatter.longitude = self.Longitude
 
     def get_winpower(self):
@@ -821,7 +822,7 @@ class gsr(gr.top_block, Qt.QWidget):
     def set_prefix(self, prefix):
         self.prefix = prefix
         self.ezRAvectorlogger.filepat = 'ezRA%04d%02d%02d'+'_'+self.prefix
-        self.ezRAvectorlogger.legend = "lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize)
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
         self.formatter.filepat = 'tp-%04d%02d%02d'+'_'+self.prefix
         self.vectorlogger.filepat = 'fft-%04d%02d%02d'+'_'+self.prefix
 
@@ -870,7 +871,7 @@ class gsr(gr.top_block, Qt.QWidget):
 
     def set_freqlow(self, freqlow):
         self.freqlow = freqlow
-        self.ezRAvectorlogger.legend = "lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize)
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
         self.qtgui_vector_sink_f_1.set_x_axis(self.doplow if (self.velocity == True) else self.freqlow, (((self.dophigh-self.doplow)/self.fftsize) if (self.velocity == 1) else self.freqstep))
 
     def get_freqhigh(self):
@@ -878,7 +879,7 @@ class gsr(gr.top_block, Qt.QWidget):
 
     def set_freqhigh(self, freqhigh):
         self.freqhigh = freqhigh
-        self.ezRAvectorlogger.legend = "lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize)
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
 
     def get_filechoice(self):
         return self.filechoice
@@ -942,13 +943,14 @@ class gsr(gr.top_block, Qt.QWidget):
 
     def set_azimut(self, azimut):
         self.azimut = azimut
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
 
     def get_amsl(self):
         return self.amsl
 
     def set_amsl(self, amsl):
         self.amsl = amsl
-        self.ezRAvectorlogger.legend = "lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize)
+        self.ezRAvectorlogger.legend = "lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g \n Azdeg %g Eldeg %g" % (self.latitude,self.Longitude,self.amsl,self.prefix,self.freqlow,self.freqhigh,self.fftsize,self.azimut,self.alt)
         self.formatter.legend = "GMT,LMST,TP,DEC=%f,LONGITUDE=%f,LATITUDE=%f,AMSL=%f,FREQ=%f,BW=%f" % (self.decln,self.longitude,self.latitude,self.amsl,self.ifreq/1.0e6, self.srate/1.0e6)
 
     def get_actual_freq(self):

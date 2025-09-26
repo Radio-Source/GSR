@@ -25,7 +25,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     """
 
     def __init__(self, fftsize=2048, formatter=None, filepat="foonly-%04d%02d%02d", extension=".csv",
-        logtime=10, fmtstr="%11.9f", localtime=False, fftshift=False,longitude=2.55,Azdeg=180.0,Eldeg=57.8,legend=None):  # only default arguments here
+        logtime=10, fmtstr="%11.9f", localtime=False, fftshift=False,longitude=2.55,legend=None):  # only default arguments here
         """arguments to this function show up as parameters in GRC"""
         gr.sync_block.__init__(
             self,
@@ -45,8 +45,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.fftshift = fftshift
         self.longitude = longitude
         self.legend = legend
-        self.Azdeg = Azdeg
-        self.Eldeg = Eldeg
+        
         self.legcount = 0
         self.fn = ""
         self.curlegend = legend

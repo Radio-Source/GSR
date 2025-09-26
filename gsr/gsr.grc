@@ -1068,8 +1068,8 @@ blocks:
     filepat: '''ezRA%04d%02d%02d''+''_''+prefix'
     fmtstr: '''%6.2f'''
     formatter: None
-    legend: '"lat %g  long %g  amsl %g  name %s\nfreqMin %g  freqMax %g  freqBinQty
-      %g" % (latitude,Longitude,amsl,prefix,freqlow,freqhigh,fftsize)'
+    legend: '"lat %g long %g amsl %g name %s\nfreqMin %g freqMax %g freqBinQty %g
+      \n Azdeg %g Eldeg %g" % (latitude,Longitude,amsl,prefix,freqlow,freqhigh,fftsize,azimut,alt)'
     localtime: False if utc != 0 else True
     logtime: logtime*3
     longitude: longitude
