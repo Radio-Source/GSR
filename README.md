@@ -138,7 +138,8 @@ Copy **ra_funcs.py** file to Lib radioconda subdir.
 
 Radioconda is in your users space subdir
 Example for me my user name is "smrt"  I copy to C:\Users\smrt\radioconda\Lib\ra_funcs.py
-
+or in folder  c:\ProgramData\radioconda\
+depending of your install
 
 <ins>**Then reboot Windows to load ra_funcs.py at start of radioconda next time**</ins>
 
